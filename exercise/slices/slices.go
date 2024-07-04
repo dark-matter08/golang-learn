@@ -18,5 +18,26 @@ import "fmt"
 
 type Part string
 
+func printSlice(title string, slice []Part) {
+	fmt.Println()
+	fmt.Println("---", title, "---")
+	for i := 0; i < len(slice); i++ {
+		element := slice[i]
+		fmt.Println("=>", element)
+
+	}
+}
+
 func main() {
+	line := []Part{"start", "middle", "half-middle"}
+
+	printSlice("Starting Assembly", line)
+
+	line = append(line, "second-half-middle", "third-half-middle")
+	printSlice("Extended Assembly", line)
+
+	line = line[3:]
+
+	printSlice("Sliced Assembly", line)
+
 }
