@@ -18,6 +18,50 @@ package main
 
 import "fmt"
 
+const (
+	Active   = true
+	InActive = false
+)
+
+type SecurityTag bool
+
+type Item struct {
+	name string
+	tag  SecurityTag
+}
+
+func activate(tag *SecurityTag) {
+	*tag = Active
+}
+
+func deactivate(tag *SecurityTag) {
+	*tag = InActive
+}
+
+func checkout(items []Item) {
+	fmt.Println("Checking out...")
+
+	for i := 0; i < len(items); i++ {
+		deactivate(&items[i].tag)
+	}
+}
+
 func main() {
+	shirt := Item{"Shirt", Active}
+	pants := Item{"Pants", Active}
+	shoes := Item{"Shoes ", Active}
+	watch := Item{"Watch", Active}
+
+	items := []Item{shirt, pants, shoes, watch}
+	fmt.Println(items)
+
+	deactivate(&items[0].tag)
+	fmt.Println(items)
+
+	checkout(items)
+	fmt.Println("Checked out items:", items)
+
+	activate(&items[0].tag)
+	fmt.Println(items)
 
 }
